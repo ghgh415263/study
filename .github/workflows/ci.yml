@@ -29,5 +29,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Docker Compose로 MySQL 실행
+        run: docker-compose up -d
+
       - name: Maven 빌드 & 테스트
         run: mvn clean verify
