@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -21,6 +22,7 @@ import java.util.Optional;
  *
  * 세션이 없거나 userId가 없으면 "no_session" 문자열로 처리합니다.
  */
+@EnableJpaAuditing
 @Configuration
 public class PersistenceConfig {
 
