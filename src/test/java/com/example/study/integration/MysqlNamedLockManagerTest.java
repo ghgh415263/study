@@ -41,11 +41,10 @@ class MysqlNamedLockManagerTest {
 		String lockName = "conflict_lock";
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 
-		Future<Boolean> result1 = executor.submit(() -> lockManager.acquireLock(lockName, 1));
+		boolean firstLock = lockManager.acquireLock(lockName, 1);
 		Future<Boolean> result2 = executor.submit(() -> lockManager.acquireLock(lockName, 1));
 
 		try {
-			boolean firstLock = result1.get(4, TimeUnit.SECONDS);
 			boolean secondLock = result2.get(4, TimeUnit.SECONDS);
 
 			assertTrue(firstLock, "첫 번째 락 획득에 실패했습니다");

@@ -1,6 +1,7 @@
-package com.example.study.ui;
+package com.example.study.ui.member;
 
-import com.example.study.application.MemberLoginService;
+import com.example.study.application.member.MemberLoginDto;
+import com.example.study.application.member.MemberLoginService;
 import com.example.study.domain.member.Member;
 import com.example.study.webcommon.ApiSuccessResponse;
 import jakarta.servlet.http.HttpSession;

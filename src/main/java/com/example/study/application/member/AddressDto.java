@@ -1,4 +1,4 @@
-package com.example.study.application;
+package com.example.study.application.member;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

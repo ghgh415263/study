@@ -1,4 +1,4 @@
-package com.example.study.application;
+package com.example.study.application.member;
 
 import com.example.study.domain.*;
 import com.example.study.domain.member.*;

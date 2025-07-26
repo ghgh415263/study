@@ -1,7 +1,7 @@
-package com.example.study.ui;
+package com.example.study.ui.member;
 
-import com.example.study.application.MemberJoinDto;
-import com.example.study.application.MemberJoinService;
+import com.example.study.application.member.MemberJoinDto;
+import com.example.study.application.member.MemberJoinService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
