@@ -15,8 +15,8 @@ public class MemberLoginService {
     private final PasswordEncoder passwordEncoder;
 
     public Member login(MemberLoginDto memberLoginDto) {
-        return memberRepository.findByLoginId(memberLoginDto.getLoginId())
-                .filter(member -> passwordEncoder.isMatch(memberLoginDto.getPassword(), member.getPassword()))
+        return memberRepository.findByLoginId(memberLoginDto.loginId())
+                .filter(member -> passwordEncoder.isMatch(memberLoginDto.password(), member.getPassword()))
                 .orElseThrow(InvalidCredentialsException::new);
     }
 }

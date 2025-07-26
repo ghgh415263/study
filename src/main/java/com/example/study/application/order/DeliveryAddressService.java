@@ -17,12 +17,12 @@ public class DeliveryAddressService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Long saveDeliveryAddress(String memberId, DeliveryAddressDto dto) {
         AddressVO addressVO = new AddressVO(
-                dto.getZipCode(),
-                dto.getBaseAddress(),
-                dto.getDetailAddress()
+                dto.zipCode(),
+                dto.baseAddress(),
+                dto.detailAddress()
         );
 
-        DeliveryAddress deliveryAddress = new DeliveryAddress(memberId, dto.getName(), addressVO);
+        DeliveryAddress deliveryAddress = new DeliveryAddress(memberId, dto.name(), addressVO);
 
         return deliveryAddressRepository.save(deliveryAddress).getId();
     }

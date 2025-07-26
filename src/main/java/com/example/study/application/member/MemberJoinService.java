@@ -33,23 +33,23 @@ public class MemberJoinService {
     @Transactional
     public String saveMember(MemberJoinDto memberJoinDto) {
 
-        if (passwordMeter.isWeak(memberJoinDto.getPassword()))
+        if (passwordMeter.isWeak(memberJoinDto.password()))
             throw new WeakPasswordException();
 
-        if (memberCheckService.isDuplicateUsername(memberJoinDto.getLoginId()))
+        if (memberCheckService.isDuplicateUsername(memberJoinDto.loginId()))
             throw new DuplicatedLoginIdException();
 
-        AddressDto addressDto = memberJoinDto.getAddress();
+        AddressDto addressDto = memberJoinDto.address();
         AddressVO address = new AddressVO(
-                addressDto.getZipCode(),
-                addressDto.getBaseAddress(),
-                addressDto.getDetailAddress());
+                addressDto.zipCode(),
+                addressDto.baseAddress(),
+                addressDto.detailAddress());
 
         Member member = new Member(
-                memberJoinDto.getLoginId(),
-                passwordEncoder.hashPassword(memberJoinDto.getPassword()),
-                memberJoinDto.getEmail(),
-                memberJoinDto.getName(),
+                memberJoinDto.loginId(),
+                passwordEncoder.hashPassword(memberJoinDto.password()),
+                memberJoinDto.email(),
+                memberJoinDto.name(),
                 address);
 
         return memberRepository.save(member).getId().toString();
