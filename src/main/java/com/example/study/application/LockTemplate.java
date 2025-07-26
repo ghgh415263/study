@@ -1,10 +1,14 @@
 package com.example.study.application;
 
 import com.example.study.domain.LockManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.function.Supplier;
 
+@Slf4j
 @Component
 public class LockTemplate {
 
@@ -27,6 +31,7 @@ public class LockTemplate {
      * @throws IllegalArgumentException lockName이 null이거나 빈 문자열인 경우
      * @throws RuntimeException 락 획득 실패 시 발생
      */
+    @Transactional
     public <T> T executeWithLock(String lockName, Supplier<T> supplier) {
         if (lockName == null || lockName.isBlank()) {
             throw new IllegalArgumentException("lockName은 필수값입니다.");
@@ -40,7 +45,10 @@ public class LockTemplate {
         try {
             return supplier.get();
         } finally {
-            lockManager.releaseLock(lockName);
+            boolean unlocked = lockManager.releaseLock(lockName);
+            if (!unlocked) {
+                log.warn("락 해제에 실패했습니다: {}", lockName);
+            }
         }
     }
 }
