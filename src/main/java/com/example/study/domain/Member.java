@@ -26,10 +26,14 @@ public class Member extends BaseUpdateEntity {
     @Column(nullable = false)
     private String name;
 
-    public Member(String loginId, String password, String email, String name) {
+    @Embedded
+    private AddressVO memberAddress;
+
+    public Member(String loginId, String password, String email, String name, AddressVO memberAddress) {
         this.loginId = loginId;
         this.password = password;
         this.email = email;
         this.name = name;
+        this.memberAddress = memberAddress;
     }
 }

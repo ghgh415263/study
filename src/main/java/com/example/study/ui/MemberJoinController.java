@@ -16,9 +16,9 @@ import java.net.URI;
 
 @Slf4j
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/join")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberJoinController {
 
     private final MemberJoinService memberJoinService;
 

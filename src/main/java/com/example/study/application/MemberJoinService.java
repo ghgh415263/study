@@ -22,11 +22,11 @@ public class MemberJoinService {
 
     /**
      * 회원 가입 처리 메서드
-     * 1. 비밀번호 강도 확인
-     * 2. 로그인 ID 중복 검사
+     * 1. 비밀번호 강도 확인 (약한 경우 예외 발생)
+     * 2. 로그인 ID 중복 검사 (중복 시 예외 발생)
      * 3. Member 객체 생성 후 저장
      *
-     * @param memberJoinDto 가입 요청 데이터
+     * @param memberJoinDto 가입 요청 데이터 (회원 정보와 주소 정보 포함)
      * @return 저장된 회원의 ID
      */
     @Transactional
@@ -38,11 +38,18 @@ public class MemberJoinService {
         if (memberCheckService.isDuplicateUsername(memberJoinDto.getLoginId()))
             throw new DuplicatedLoginIdException();
 
+        AddressDto addressDto = memberJoinDto.getAddress();
+        AddressVO address = new AddressVO(
+                addressDto.getZipCode(),
+                addressDto.getBaseAddress(),
+                addressDto.getDetailAddress());
+
         Member member = new Member(
                 memberJoinDto.getLoginId(),
                 passwordEncoder.hashPassword(memberJoinDto.getPassword()),
                 memberJoinDto.getEmail(),
-                memberJoinDto.getName());
+                memberJoinDto.getName(),
+                address);
 
         return memberRepository.save(member).getId();
     }
