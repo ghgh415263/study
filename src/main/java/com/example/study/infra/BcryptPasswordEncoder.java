@@ -1,6 +1,6 @@
 package com.example.study.infra;
 
-import com.example.study.domain.PasswordEncoder;
+import com.example.study.domain.member.PasswordEncoder;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 

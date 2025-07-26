@@ -1,7 +1,7 @@
 package com.example.study.ui;
 
 import com.example.study.application.MemberLoginService;
-import com.example.study.domain.Member;
+import com.example.study.domain.member.Member;
 import com.example.study.webcommon.ApiSuccessResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ public class MemberLoginController {
             HttpSession session
     ) {
         Member loginedMember = memberLoginService.login(dto);
-        session.setAttribute("loginId", loginedMember.getId());
+        session.setAttribute("loginId", loginedMember.getId().toString());
 
         return ApiSuccessResponse.empty();
     }

@@ -1,9 +1,13 @@
-package com.example.study.domain;
+package com.example.study.domain.member;
 
+import com.example.study.domain.AddressVO;
+import com.example.study.domain.BaseUpdateEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Getter
 @Entity
@@ -11,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Member extends BaseUpdateEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String loginId;

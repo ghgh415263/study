@@ -1,4 +1,4 @@
-package com.example.study.domain;
+package com.example.study.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

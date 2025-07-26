@@ -1,6 +1,7 @@
 package com.example.study.application;
 
 import com.example.study.domain.*;
+import com.example.study.domain.member.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class MemberJoinService {
      * @return 저장된 회원의 ID
      */
     @Transactional
-    public Long saveMember(MemberJoinDto memberJoinDto) {
+    public String saveMember(MemberJoinDto memberJoinDto) {
 
         if (passwordMeter.isWeak(memberJoinDto.getPassword()))
             throw new WeakPasswordException();
@@ -51,6 +52,6 @@ public class MemberJoinService {
                 memberJoinDto.getName(),
                 address);
 
-        return memberRepository.save(member).getId();
+        return memberRepository.save(member).getId().toString();
     }
 }

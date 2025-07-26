@@ -1,8 +1,8 @@
 package com.example.study.application;
 
-import com.example.study.domain.Member;
-import com.example.study.domain.MemberRepository;
-import com.example.study.domain.PasswordEncoder;
+import com.example.study.domain.member.Member;
+import com.example.study.domain.member.MemberRepository;
+import com.example.study.domain.member.PasswordEncoder;
 import com.example.study.ui.MemberLoginDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

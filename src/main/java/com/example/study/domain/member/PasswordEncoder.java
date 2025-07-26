@@ -1,4 +1,4 @@
-package com.example.study.domain;
+package com.example.study.domain.member;
 
 /**
  * 비밀번호 인코딩 및 검증을 위한 전략 인터페이스입니다.

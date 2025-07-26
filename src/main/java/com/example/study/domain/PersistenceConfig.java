@@ -55,7 +55,7 @@ public class PersistenceConfig {
             if (session == null) {
                 return Optional.of("no_session");
             }
-            String userId = (String) session.getAttribute("userId");
+            String userId = (String) session.getAttribute("loginId");
             return Optional.of(userId != null ? userId : "no_session");
         }
 

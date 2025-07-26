@@ -24,7 +24,7 @@ public class MemberJoinController {
 
     @PostMapping
     public ResponseEntity<Void> join(@Validated @RequestBody MemberJoinDto dto) {
-        Long memberId = memberJoinService.saveMember(dto);
+        String memberId = memberJoinService.saveMember(dto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()            // /api/members
