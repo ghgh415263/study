@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Connection;
 
@@ -17,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * 같은 세션에서만 락 해제가 가능하기 때문에,
  * @Transactional을 사용해 같은 트랜잭션(즉, 같은 세션) 안에서 테스트가 실행되도록 했습니다.
+ * @JdbcTest에 @Transactional이 포함되어 있음.
  */
 @JdbcTest
-@Transactional
 class MysqlNamedLockManagerTest {
 
 	@Autowired
