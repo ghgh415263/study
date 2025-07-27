@@ -16,9 +16,13 @@ spring:
         format_sql: true                        # 출력되는 SQL 쿼리를 보기 좋게 포맷팅
         highlight_sql: true                     # 콘솔에서 SQL 쿼리를 하이라이트 처리 (색상)
 
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
 logging:
   level:
-    com.zaxxer.hikari: DEBUG
     org.hibernate.SQL: DEBUG                   # Hibernate SQL 쿼리 출력
     org.hibernate.orm.jdbc.bind: TRACE         # Hibernate SQL 파라미터 바인딩 출력
     org.springframework.jdbc.core: DEBUG       # Spring JDBC Template 쿼리 실행 로그

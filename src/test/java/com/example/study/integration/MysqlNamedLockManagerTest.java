@@ -1,6 +1,6 @@
 package com.example.study.integration;
 
-import com.example.study.infra.MysqlNamedLockManager;
+import com.example.study.order.command.infra.MysqlNamedLockManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,8 @@ class MysqlNamedLockManagerTest {
 
 		boolean firstLock = lockManager.acquireLock(lockName, 1);
 
-		try (Connection conn = jdbcTemplate.getDataSource().getConnection()) {
-			JdbcTemplate otherJdbcTemplate = new JdbcTemplate(new SingleConnectionDataSource(conn, true));
+		try (Connection otherConn = jdbcTemplate.getDataSource().getConnection()) {
+			JdbcTemplate otherJdbcTemplate = new JdbcTemplate(new SingleConnectionDataSource(otherConn, true));
 			MysqlNamedLockManager otherLockManager = new MysqlNamedLockManager(otherJdbcTemplate);
 
 			boolean secondLock = otherLockManager.acquireLock(lockName, 1);

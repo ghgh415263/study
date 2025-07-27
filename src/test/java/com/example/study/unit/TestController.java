@@ -1,6 +1,6 @@
 package com.example.study.unit;
 
-import com.example.study.webcommon.CustomException;
+import com.example.study.common.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
