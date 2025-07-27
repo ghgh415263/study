@@ -5,7 +5,7 @@
 <img width="450" height="538" alt="image" src="https://github.com/user-attachments/assets/c1d118ec-01e6-49c2-b277-a760a1042cca" />
 
 # 테스트 개요
-테스트 및 로컬 개발 환경에서 `docker-compose`를 활용해 MySQL 등 의존 서비스를 자동으로 실행하고, **GitHub Actions를 사용한 CI 파이프라인**이 설정되어 있습니다.
+테스트 및 로컬 개발 환경에서 `docker-compose`를 활용해 MySQL 등 의존 서비스를 자동으로 실행합니다. 또한, **GitHub Actions를 사용한 CI 파이프라인**이 설정되어 있습니다.
 
 ## 주요 기능 및 설정
 
