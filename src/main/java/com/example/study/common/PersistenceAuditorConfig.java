@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 @EnableJpaAuditing
 @Configuration
-public class PersistenceConfig {
+public class PersistenceAuditorConfig {
 
     /**
      * 현재 감사자를 제공하는 AuditorAware 빈을 등록합니다.
