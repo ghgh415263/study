@@ -1,4 +1,4 @@
-package com.example.study.common;
+package com.example.study.common.persistance;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

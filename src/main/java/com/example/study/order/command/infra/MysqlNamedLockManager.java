@@ -1,6 +1,6 @@
 package com.example.study.order.command.infra;
 
-import com.example.study.common.LockManager;
+import com.example.study.common.lock.LockManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 

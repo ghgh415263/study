@@ -1,4 +1,4 @@
-package com.example.study.common;
+package com.example.study.common.lock;
 
 /**
  * 락 획득 실패 시 발생하는 커스텀 런타임 예외 클래스

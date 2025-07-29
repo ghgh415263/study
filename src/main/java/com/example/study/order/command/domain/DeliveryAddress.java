@@ -1,6 +1,6 @@
 package com.example.study.order.command.domain;
 
-import com.example.study.common.BaseUpdateEntity;
+import com.example.study.common.persistance.BaseUpdateEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

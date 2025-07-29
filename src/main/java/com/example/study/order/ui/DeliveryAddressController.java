@@ -1,6 +1,6 @@
 package com.example.study.order.ui;
 
-import com.example.study.common.LockTemplate;
+import com.example.study.common.lock.LockTemplate;
 import com.example.study.order.command.application.DeliveryAddressDto;
 import com.example.study.order.command.application.DeliveryAddressService;
 import com.example.study.common.ApiSuccessResponse;
