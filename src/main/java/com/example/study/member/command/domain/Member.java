@@ -1,14 +1,16 @@
 package com.example.study.member.command.domain;
 
 import com.example.study.order.command.domain.AddressVO;
-import com.example.study.common.BaseUpdateEntity;
+import com.example.study.common.persistance.BaseUpdateEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import java.util.UUID;
 
+@Audited
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

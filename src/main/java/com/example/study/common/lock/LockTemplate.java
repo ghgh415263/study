@@ -1,4 +1,4 @@
-package com.example.study.common;
+package com.example.study.common.lock;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
