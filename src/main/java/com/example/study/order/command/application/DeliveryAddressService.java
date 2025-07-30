@@ -1,5 +1,6 @@
 package com.example.study.order.command.application;
 
+import com.example.study.common.LoginMemberContext;
 import com.example.study.order.command.domain.AddressVO;
 import com.example.study.order.command.domain.DeliveryAddress;
 import com.example.study.order.command.domain.DeliveryAddressRepository;
@@ -14,15 +15,17 @@ public class DeliveryAddressService {
 
     private final DeliveryAddressRepository deliveryAddressRepository;
 
+    private final LoginMemberContext loginMemberContext;
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Long saveDeliveryAddress(String memberId, DeliveryAddressDto dto) {
+    public Long saveDeliveryAddress(DeliveryAddressDto dto) {
         AddressVO addressVO = new AddressVO(
                 dto.zipCode(),
                 dto.baseAddress(),
                 dto.detailAddress()
         );
 
-        DeliveryAddress deliveryAddress = new DeliveryAddress(memberId, dto.name(), addressVO);
+        DeliveryAddress deliveryAddress = new DeliveryAddress(loginMemberContext.getLoginId(), dto.name(), addressVO);
 
         return deliveryAddressRepository.save(deliveryAddress).getId();
     }
