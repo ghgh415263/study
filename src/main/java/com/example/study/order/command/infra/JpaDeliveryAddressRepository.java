@@ -3,8 +3,11 @@ package com.example.study.order.command.infra;
 import com.example.study.order.command.domain.DeliveryAddress;
 import com.example.study.order.command.domain.DeliveryAddressRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -20,5 +23,26 @@ public class JpaDeliveryAddressRepository implements DeliveryAddressRepository {
         } else {
             return entityManager.merge(deliveryAddress);
         }
+    }
+
+    @Override
+    public DeliveryAddress findById(Long id) {
+        return Optional.ofNullable(entityManager.find(DeliveryAddress.class, id))
+                .orElseThrow(() -> new EntityNotFoundException("배송주소를 찾을 수 없습니다."));
+    }
+
+    @Override
+    public DeliveryAddress modify(Long id, DeliveryAddress deliveryAddress) {
+        DeliveryAddress modifiedDeliveryAddress = findById(id);
+        modifiedDeliveryAddress.updateDeliveryAddress(deliveryAddress.getName(), deliveryAddress.getAddress());
+
+        return save(modifiedDeliveryAddress);
+    }
+
+    @Override
+    public DeliveryAddress findByMemberId(String memberId) {
+        return entityManager.createQuery("SELECT m FROM DeliveryAddress m WHERE m.memberId = :memberId", DeliveryAddress.class)
+                .setParameter("memberId", memberId)
+                .getSingleResult();
     }
 }

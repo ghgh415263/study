@@ -29,4 +29,19 @@ public class DeliveryAddressService {
 
         return deliveryAddressRepository.save(deliveryAddress).getId();
     }
+
+    @Transactional()
+    public Long modifyDeliveryAddress(String memberId, DeliveryAddressDto dto) {
+        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(deliveryAddressRepository.findByMemberId(memberId).getId());
+
+        AddressVO addressVO = new AddressVO(
+                dto.zipCode(),
+                dto.baseAddress(),
+                dto.detailAddress()
+        );
+
+        modifyDeliveryAddress.updateDeliveryAddress(dto.name(), addressVO);
+
+        return deliveryAddressRepository.save(modifyDeliveryAddress).getId();
+    }
 }
