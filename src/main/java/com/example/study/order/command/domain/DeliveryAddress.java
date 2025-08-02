@@ -32,6 +32,11 @@ public class DeliveryAddress extends BaseUpdateEntity {
         this.address = address;
     }
 
+    public void updateDeliveryAddress(String name, AddressVO address){
+        this.name = name;
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
