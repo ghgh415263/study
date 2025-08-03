@@ -13,6 +13,7 @@ spring:
       ddl-auto: update                          # 애플리케이션 실행 시 DB 스키마 자동 업데이트
     properties:
       hibernate:
+        show_sql: false
         format_sql: true                        # 출력되는 SQL 쿼리를 보기 좋게 포맷팅
         highlight_sql: true                     # 콘솔에서 SQL 쿼리를 하이라이트 처리 (색상)
 

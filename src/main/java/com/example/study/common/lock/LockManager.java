@@ -1,4 +1,4 @@
-package com.example.study.common;
+package com.example.study.common.lock;
 
 /**
  * 네임드 락을 획득 및 해제하는 추상화 인터페이스입니다.
