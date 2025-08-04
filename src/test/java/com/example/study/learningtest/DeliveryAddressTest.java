@@ -1,5 +1,6 @@
-package com.example.study.integration;
+package com.example.study.learningtest;
 
+import com.example.study.integration.TestPersistenceAuditorConfig;
 import com.example.study.order.command.domain.AddressVO;
 import com.example.study.order.command.domain.DeliveryAddress;
 import com.example.study.order.command.domain.DeliveryAddressRepository;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Import(TestPersistenceAuditorConfig.class)
 @DataJpaTest
-public class JpaDeliveryAddressRepositoryTest {
+public class DeliveryAddressTest {
 
     @Autowired
     private EntityManager em;
@@ -31,26 +32,38 @@ public class JpaDeliveryAddressRepositoryTest {
     }
 
     @Test
-    @DisplayName("DeliveryAddress 저장")
-    void saveNewDeliveryAddress() {
+    @DisplayName("DeliveryAddress를 수정한다")
+    void updateNewDeliveryAddress() {
+
         // given
         UUID memberId = UUID.randomUUID();
         AddressVO address = new AddressVO("06000", "서울 강남구", "101호");
         DeliveryAddress deliveryAddress = new DeliveryAddress(memberId.toString(), "우리집", address);
 
-        // when
         DeliveryAddress saved = deliveryAddressRepository.save(deliveryAddress);
 
         // 영속성 컨텍스트 초기화 (flush + clear)
         em.flush();
         em.clear();
 
-        // then
-        DeliveryAddress foundEntity = em.find(DeliveryAddress.class, saved.getId());
+        // given
+        AddressVO changedAdress = new AddressVO("38750", "춘천시 명동", "702호");
+        DeliveryAddress changedAdressDeliveryAddress = new DeliveryAddress(memberId.toString(), "상훈네집", changedAdress);
 
-        assertThat(foundEntity.getId()).isEqualTo(saved.getId());
-        assertThat(foundEntity.getMemberId()).isEqualTo(saved.getMemberId());
-        assertThat(foundEntity.getName()).isEqualTo(saved.getName());
-        assertThat(foundEntity.getAddress()).isEqualTo(saved.getAddress());
+        // when
+        DeliveryAddress changedEntity = deliveryAddressRepository.findById(saved.getId());
+        changedEntity.updateDeliveryAddress(changedAdressDeliveryAddress.getName(), changedAdress);
+
+        // 영속성 컨텍스트 초기화 (flush + clear)
+        em.flush();
+        em.clear();
+
+        // then
+        DeliveryAddress foundEntity = deliveryAddressRepository.findById(saved.getId());
+
+        assertThat(foundEntity.getName()).isEqualTo("상훈네집");
+        assertThat(foundEntity.getAddress().getZipCode()).isEqualTo("38750");
+        assertThat(foundEntity.getAddress().getBaseAddress()).isEqualTo("춘천시 명동");
+        assertThat(foundEntity.getAddress().getDetailAddress()).isEqualTo("702호");
     }
 }
