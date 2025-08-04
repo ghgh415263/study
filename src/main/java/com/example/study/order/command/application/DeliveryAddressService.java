@@ -29,4 +29,17 @@ public class DeliveryAddressService {
 
         return deliveryAddressRepository.save(deliveryAddress).getId();
     }
+
+    @Transactional
+    public void modifyDeliveryAddress(DeliveryAddressRequestDto dto) {
+        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(dto.id());
+
+        AddressVO addressVO = new AddressVO(
+            dto.zipCode(),
+            dto.baseAddress(),
+            dto.detailAddress()
+        );
+
+        modifyDeliveryAddress.updateDeliveryAddress(dto.name(), addressVO);
+    }
 }
