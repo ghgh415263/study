@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/login")
 @RequiredArgsConstructor
@@ -24,8 +26,8 @@ public class MemberLoginController {
             @Valid @RequestBody MemberLoginDto dto,
             HttpSession session
     ) {
-        Member loginedMember = memberLoginService.login(dto);
-        session.setAttribute("loginId", loginedMember.getId().toString());
+        UUID loginedMemberId = memberLoginService.login(dto);
+        session.setAttribute("loginId", loginedMemberId.toString());
 
         return ApiSuccessResponse.empty();
     }
