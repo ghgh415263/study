@@ -12,6 +12,7 @@ spring:
     hibernate:
       ddl-auto: update                          # 애플리케이션 실행 시 DB 스키마 자동 업데이트
     properties:
+      org.hibernate.envers.store_data_at_delete: true # envers가 삭제도 상세하게 기록하게함.
       hibernate:
         show_sql: false
         format_sql: true                        # 출력되는 SQL 쿼리를 보기 좋게 포맷팅

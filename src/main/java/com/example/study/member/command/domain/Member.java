@@ -35,11 +35,37 @@ public class Member extends BaseUpdateEntity {
     @Embedded
     private AddressVO memberAddress;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MemberStatus status = MemberStatus.ACTIVE;
+
     public Member(String loginId, String password, String email, String name, AddressVO memberAddress) {
         this.loginId = loginId;
         this.password = password;
         this.email = email;
         this.name = name;
         this.memberAddress = memberAddress;
+    }
+
+    public void withdraw() {
+        if (this.status == MemberStatus.WITHDRAWN || this.status == MemberStatus.SUSPENDED) {
+            throw new InvalidMemberStateException(this.status, MemberStatus.WITHDRAWN);
+        }
+
+        this.status = MemberStatus.WITHDRAWN;
+    }
+
+    public void suspend() {
+        if (this.status != MemberStatus.ACTIVE) {
+            throw new InvalidMemberStateException(this.status, MemberStatus.SUSPENDED);
+        }
+        this.status = MemberStatus.SUSPENDED;
+    }
+
+    public void activate() {
+        if (this.status == MemberStatus.WITHDRAWN) {
+            throw new InvalidMemberStateException(this.status, MemberStatus.ACTIVE);
+        }
+        this.status = MemberStatus.ACTIVE;
     }
 }
