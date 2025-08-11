@@ -1,4 +1,4 @@
-package com.example.study.common;
+package com.example.study.common.Authentication;
 
 import org.springframework.stereotype.Component;
 
