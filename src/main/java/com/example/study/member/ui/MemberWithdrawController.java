@@ -1,6 +1,7 @@
 package com.example.study.member.ui;
 
 import com.example.study.common.ApiSuccessResponse;
+import com.example.study.common.LoginMemberContext;
 import com.example.study.member.command.application.MemberWithdrawService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +18,11 @@ public class MemberWithdrawController {
 
     private final MemberWithdrawService memberWithdrawService;
 
-    @DeleteMapping("/{memberId}")
-    public ApiSuccessResponse<Void> withdraw(@PathVariable UUID memberId) {
-        memberWithdrawService.withdrawMember(memberId);
+    private final LoginMemberContext loginMemberContext;
+
+    @DeleteMapping
+    public ApiSuccessResponse<Void> withdraw() {
+        memberWithdrawService.withdrawMember(UUID.fromString(loginMemberContext.getLoginId()));
         return ApiSuccessResponse.empty();
     }
 }
