@@ -26,7 +26,7 @@ public class Product {
     @Column(nullable = false)
     private int stockQuantity;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     private List<ProductTag> productTags = new ArrayList<>();
 
     public Product(String name, int price, int stockQuantity){
@@ -37,5 +37,6 @@ public class Product {
 
     public void setProductTags(ProductTag tags) {
         this.productTags.add(tags);
+        tags.setProduct(this);
     }
 }

@@ -5,7 +5,6 @@ import com.example.study.product.command.domain.ProductRepository;
 import com.example.study.product.command.domain.ProductTag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
@@ -14,14 +13,14 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public Long saveProduct(ProductDto dto){
         Product product = new Product(dto.name(), dto.price(), dto.stockQuantity());
-        productRepository.save(product);
 
-        for(ProductTag productTag : dto.productTags()){
-            product.setProductTags(productTag);
+        for(ProductTagDto productTag : dto.productTags()){
+            product.setProductTags(new ProductTag(productTag.tagName()));
         }
+
         return productRepository.save(product).getId();
     }
 

@@ -1,6 +1,6 @@
 package com.example.study.product.command.application;
 
-import com.example.study.product.command.domain.ProductTag;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
@@ -10,11 +10,11 @@ public record ProductDto(
         @NotBlank(message = "상품 이름은 필수입니다.")
         String name,
 
-        @NotBlank(message = "상품 가격은 필수입니다.")
-        int price,
+        @Min(value = 1, message = "가격은 최소 {value} 이상이어야 합니다.")
+        Integer price,
 
-        @NotBlank(message = "상품 수량은 필수입니다.")
-        int stockQuantity,
+        @Min(value = 1, message = "수량은 최소 {value} 이상이어야 합니다.")
+        Integer stockQuantity,
 
-        List<ProductTag> productTags
+        List<ProductTagDto> productTags
 ) {}
