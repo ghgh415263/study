@@ -1,13 +1,17 @@
 package com.example.study.product.command.domain;
 
+import com.example.study.common.persistance.BaseUpdateEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Getter
-@NoArgsConstructor
-public class ProductTag {
+@Audited
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class ProductTag extends BaseUpdateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

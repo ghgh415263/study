@@ -4,6 +4,7 @@ import com.example.study.common.LoginMemberContext;
 import com.example.study.order.command.domain.AddressVO;
 import com.example.study.order.command.domain.DeliveryAddress;
 import com.example.study.order.command.domain.DeliveryAddressRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,7 +33,8 @@ public class DeliveryAddressService {
 
     @Transactional
     public void modifyDeliveryAddress(DeliveryAddressRequestDto dto) {
-        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(dto.id());
+        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(dto.id())
+                .orElseThrow(() -> new EntityNotFoundException("배송주소를 찾을 수 없습니다."));
 
         AddressVO addressVO = new AddressVO(
             dto.zipCode(),

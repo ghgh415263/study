@@ -6,6 +6,7 @@ import com.example.study.order.command.domain.DeliveryAddress;
 import com.example.study.order.command.domain.DeliveryAddressRepository;
 import com.example.study.order.command.infra.JpaDeliveryAddressRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ public class DeliveryAddressTest {
         DeliveryAddress changedAdressDeliveryAddress = new DeliveryAddress(memberId.toString(), "상훈네집", changedAdress);
 
         // when
-        DeliveryAddress changedEntity = deliveryAddressRepository.findById(saved.getId());
+        DeliveryAddress changedEntity = deliveryAddressRepository.findById(saved.getId()).orElseThrow(() -> new EntityNotFoundException("배송주소를 찾을 수 없습니다."));
         changedEntity.updateDeliveryAddress(changedAdressDeliveryAddress.getName(), changedAdress);
 
         // 영속성 컨텍스트 초기화 (flush + clear)
@@ -59,7 +60,7 @@ public class DeliveryAddressTest {
         em.clear();
 
         // then
-        DeliveryAddress foundEntity = deliveryAddressRepository.findById(saved.getId());
+        DeliveryAddress foundEntity = deliveryAddressRepository.findById(saved.getId()).orElseThrow(() -> new EntityNotFoundException("배송주소를 찾을 수 없습니다."));
 
         assertThat(foundEntity.getName()).isEqualTo("상훈네집");
         assertThat(foundEntity.getAddress().getZipCode()).isEqualTo("38750");

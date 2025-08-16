@@ -1,8 +1,10 @@
 package com.example.study.order.command.domain;
 
+import java.util.Optional;
+
 public interface DeliveryAddressRepository {
 
     DeliveryAddress save(DeliveryAddress deliveryAddress);
 
-    DeliveryAddress findById(Long id);
+    Optional<DeliveryAddress> findById(Long id);
 }

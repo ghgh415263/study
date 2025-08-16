@@ -6,6 +6,7 @@ import com.example.study.product.command.domain.ProductRepository;
 import com.example.study.product.command.domain.ProductTag;
 import com.example.study.product.command.infra.JpaProductRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ public class ProductTest {
         em.clear();
 
         // then
-        Product foundEntity = productRepository.findById(saved.getId());
+        Product foundEntity = productRepository.findById(saved.getId()).orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다."));
 
         assertThat(foundEntity.getName()).isEqualTo("갤럭시S25");
         assertThat(foundEntity.getPrice()).isEqualTo(1520000);
