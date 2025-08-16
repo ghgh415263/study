@@ -32,7 +32,8 @@ public class DeliveryAddressService {
 
     @Transactional
     public void modifyDeliveryAddress(DeliveryAddressRequestDto dto) {
-        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(dto.id());
+        DeliveryAddress modifyDeliveryAddress = deliveryAddressRepository.findById(dto.id())
+                .orElseThrow(DeliveryAddressNotFoundException::new);
 
         AddressVO addressVO = new AddressVO(
             dto.zipCode(),

@@ -42,11 +42,9 @@ public class MemberAudRepositoryTest {
     @AfterEach
     void cleanup() {
         // 후처리: 별도 트랜잭션 내에서 관련 테이블 데이터 삭제 (테스트 독립성 확보)
-        transactionTemplate.execute(status -> {
+        transactionTemplate.executeWithoutResult(status -> {
             em.createNativeQuery("DELETE FROM member").executeUpdate();
             em.createNativeQuery("DELETE FROM member_aud").executeUpdate();
-            em.createNativeQuery("DELETE FROM revinfo").executeUpdate();
-            return null;
         });
     }
 
@@ -59,9 +57,8 @@ public class MemberAudRepositoryTest {
         Member member = new Member("login123451", "pw1234", "test@example.com", "홍길동", address);
 
         // when: 별도 트랜잭션(REQUIRES_NEW)으로 member 저장
-        transactionTemplate.execute(status -> {
+        transactionTemplate.executeWithoutResult(status -> {
             memberRepository.save(member); // DB에 회원 저장 및 리비전 자동 생성
-            return null;
         });
 
         // then: 저장된 회원의 리비전 정보 조회

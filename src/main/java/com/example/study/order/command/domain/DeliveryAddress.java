@@ -5,16 +5,18 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import java.util.UUID;
 
 @Getter
 @Entity
+@Audited
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DeliveryAddress extends BaseUpdateEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "member_id", nullable = false)
