@@ -14,7 +14,7 @@ import org.hibernate.envers.Audited;
 public class ProductTag extends BaseUpdateEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_tag_id")
     private Long id;
 

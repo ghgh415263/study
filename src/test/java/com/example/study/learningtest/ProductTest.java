@@ -1,12 +1,12 @@
 package com.example.study.learningtest;
 
 import com.example.study.integration.TestPersistenceAuditorConfig;
+import com.example.study.order.command.application.DeliveryAddressNotFoundException;
 import com.example.study.product.command.domain.Product;
 import com.example.study.product.command.domain.ProductRepository;
 import com.example.study.product.command.domain.ProductTag;
 import com.example.study.product.command.infra.JpaProductRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ public class ProductTest {
         em.clear();
 
         // then
-        Product foundEntity = productRepository.findById(saved.getId()).orElseThrow(() -> new EntityNotFoundException("상품을 찾을 수 없습니다."));
+        Product foundEntity = productRepository.findById(saved.getId()).orElseThrow(DeliveryAddressNotFoundException::new);
 
         assertThat(foundEntity.getName()).isEqualTo("갤럭시S25");
         assertThat(foundEntity.getPrice()).isEqualTo(1520000);

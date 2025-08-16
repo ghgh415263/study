@@ -17,7 +17,7 @@ import java.util.List;
 public class Product extends BaseUpdateEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
 
